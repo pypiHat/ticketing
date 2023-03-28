@@ -1,0 +1,18 @@
+version: "3.7"
+
+services:
+
+  postgreDB: 
+    image: postgres
+    container_name: postgres_ticket
+    ports:
+      - 5433:5432
+    volumes:
+      - ticket:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+volumes:
+  ticket:
