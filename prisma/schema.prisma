@@ -39,9 +39,9 @@ model User {
   fname             String
   lname             String
   avatar_url        String?
-  registration_date DateTime
+  registration_date DateTime?
   phone             String
-  birthday          DateTime
+  birthday          DateTime?
   password          String
   orders            Order[]
 }
