@@ -20,8 +20,40 @@ const create = async (req, res, next) => {
 }
 
 
+const update = async (req, res, next) => {
+    console.log('hey')
+}
+
+const remove = async (req, res, next) => {
+    console.log('hey')
+}
+
+const getUser = async (req, res, next) => {
+    console.log('hey')
+}
+
+const check = async (req, res, next) => {
+    console.log('hey')
+}
+
+const getUserOrders = async (req, res, next) => {
+    console.log('hey')
+}
+
+const chargeBallance = async (req, res, next) => {
+    console.log('hey')
+}
+
+const walletBallance = async (req, res, next) => {
+    console.log('hey')
+}
+
+const auth = async (req, res, next) => {
+    console.log('123');
+}
+
 
 
 module.exports = {
-    create
+    create,
 }
