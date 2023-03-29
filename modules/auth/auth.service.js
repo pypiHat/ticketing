@@ -1,5 +1,20 @@
 const db = require('../../db')
 
+async function getUserById(id){
+  return await db.user.findUnique({
+    where:{
+      id
+    },
+  });
+};
+
+async function getUserByPhone(mobile){
+  return await db.user.findUnique({
+    where: {
+      phone: mobile,
+    },
+  });
+};
 
 function createPermittedData(data) {
     const result = {};
@@ -32,6 +47,21 @@ const register = async (data) => {
 }
 
 
+const removeUser = async (id) => {
+  try {
+    const result = await db.user.delete({
+      where: {
+        id: id
+      },
+    });
+  } catch (err) {
+      throw new Error(err.message)
+  }
+}
+
 module.exports = {
-    register
+    register,
+    getUserById,
+    getUserByPhone,
+    removeUser,
 }
