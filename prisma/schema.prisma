@@ -23,13 +23,13 @@ model Order {
 
 model Ticket {
   // ticket model
-  id                String     @id @default(uuid())
+  id                String     @id @default(uuid()) @unique
   from_location     String
   to_location       String
-  arrival_date      DateTime
-  departure_date    DateTime
+  arrival_date      String
+  departure_date    String
   unit_price        Float
-  count             Int
+  count             Int?
   orders            Order[]
 }
 

@@ -16,8 +16,8 @@ CREATE TABLE "Ticket" (
     "id" TEXT NOT NULL,
     "from_location" TEXT NOT NULL,
     "to_location" TEXT NOT NULL,
-    "arrival_date" TIMESTAMP(3) NOT NULL,
-    "departure_date" TIMESTAMP(3) NOT NULL,
+    "arrival_date" TEXT NOT NULL,
+    "departure_date" TEXT NOT NULL,
     "unit_price" DOUBLE PRECISION NOT NULL,
     "count" INTEGER NOT NULL,
 
@@ -37,6 +37,9 @@ CREATE TABLE "User" (
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_phone_key" ON "User"("phone");
 
 -- AddForeignKey
 ALTER TABLE "Order" ADD CONSTRAINT "Order_ticket_id_fkey" FOREIGN KEY ("ticket_id") REFERENCES "Ticket"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
