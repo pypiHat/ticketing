@@ -35,17 +35,42 @@ function createPermittedData(data) {
     return result;
   }
 
-const register = async (data) => {
-    try {
-        const user = await db.user.create({
-            data: createPermittedData(data)
-        })
-        return user.id;
-    } catch (err) {
-        throw new Error(err.message)
+function updatedPermittedData(data) {
+  const result = {};
+  const permittedKeyChange = [
+    "fname",
+    "lname",
+  ];
+  for (const key of permittedKeyChange) {
+    if (data.hasOwnProperty(key)) {
+      result[key] = data[key];
     }
+  }
+  return result;
 }
 
+const register = async (data) => {
+  try {
+    const user = await db.user.create({
+      data: createPermittedData(data)
+    })
+    return user.id;
+  }catch (err) {
+    throw new Error(err.message)
+  }
+}
+
+const update = async(id, data) => {
+  try {
+    const result = await db.user.update({
+      where: { id: parseInt(id) },
+      data: updatedPermittedData(data),
+    });
+    return result;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
 
 const removeUser = async (id) => {
   try {
@@ -61,7 +86,9 @@ const removeUser = async (id) => {
 
 module.exports = {
     register,
+    update,
     getUserById,
     getUserByPhone,
     removeUser,
+    
 }

@@ -18,7 +18,7 @@ const {authController} = require('../../modules').authModule
 
 
 router.post('/user', authController.create); // create a user
-// router.patch('/user/:id', authController.update) // update a profile by id
+router.patch('/user/:id', authController.update) // update a profile by id
 router.delete('/user/:id', authController.remove) // remove a user by id
 router
     .route('/user/:pid')
@@ -28,7 +28,7 @@ router
 // router.post('/users/wallet', authController.chargeBallance) //increase wallet balance
 // router.get('/user/wallet', authController.walletBallance) // get wallet balance
 
-// router.post('/auth', authController.auth) //User authentication via phone and password
+router.post('/auth', authController.auth) //User authentication via phone and password
 
 
 module.exports = router;

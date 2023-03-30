@@ -19,7 +19,9 @@ const create =  async (req, res, next) => {
 }
 
 const update = async (req, res, next) => {
-    console.log('hey')
+    const { id } = req.params;
+    const result = await userService.update(id, req.body);
+    return res.send(result);
 }
 
 const remove = async (req, res, next) => {
@@ -66,19 +68,48 @@ const chargeBallance = async (req, res, next) => {
 }
 
 const walletBallance = async (req, res, next) => {
-    console.log('hey')
+    // try {
+    
+    // } catch (error) {
+        
+    // }
 }
 
 const auth = async (req, res, next) => {
-    console.log('123');
+    try {
+        const { phone, password } = req.body
+        const user = userService.getUserByPhone(phone)
+        if (!user) {
+            return res.status(403).json({
+              message: "invalid credential!",
+            });
+        }
+        const validPass = await bcrypt.compare(password, user.password);
+        if (!validPass)
+        return res.status(403).json({
+          message: "invalid credential!",
+        });
+        const token = jwt.sign({ username: user.email }, process.env.SECRET_KEY, {
+        expiresIn: Number(process.env.TOKEN_EXPIRE_TIME),});
+        
+        return res.json({
+            access_token: token,
+        });   
+    } catch (error) {
+        error.status = 500;
+        next(error);
+    }
 }
 
 
 
 module.exports = {
     create,
+    update,
     getUser,
     checkByPhone,
     remove,
+    walletBallance,
+    auth
 
 }
