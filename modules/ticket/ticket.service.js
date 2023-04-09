@@ -27,10 +27,8 @@ const addTicket = async (data) => {
         const result = await db.ticket.create({
             data: createPermittedData(data)
         })
-        console.log("00001111");
         return result.id
     } catch (err) {
-        console.log("000011112222");
         throw new Error(err.message)
     }
     
